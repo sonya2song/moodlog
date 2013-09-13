@@ -25,7 +25,15 @@ class Entries(webapp2.RequestHandler):
     note=self.request.get('note')
     score=self.request.get('score')
 
+class Input(webapp2.RequestHandler):
+  def get(self):
+    f=open("input.html")
+    self.response.headers['Content-type']="text/html ;charset=utf-8"
+    self.response.write(f.read())
+
+
 application= webapp2.WSGIApplication([
   ('/',MainPage),
+  ('/input',Input),
   ('/api/1/entries',Entries),
   ],debug=True)
