@@ -6,38 +6,69 @@
 </style>
 </head>
 <body>
-
+hello
 <div id="graph">
 </div>
 
 <script src="vendor/js/d3.v3.min.js"></script>
-<script src="vendor/js/underscore-min.js"></scripts>
+<script src="vendor/js/underscore-min.js"></script>
 <script>
-
 function draw(data) {
   var width=800;
   var height=600;
+  var distance=50;
 
   var svg=d3.select("#graph")
+    .append("svg")
     .attr("width",width)
     .attr("height",height);
   
-  // cluster by months using underscore
+  console.log(data);
 
-  svg.selectAll("g")
+  yscale=d3.scale.linear()
+    .domain([0,10])
+    .range([distance,height-distance]);
+
+  xscale=d3.scale.linear()
+    .domain([0,31*24*60])
+    .range([distance,width-distance])
+
+  data=_.values(_.reduce(data,function(x,y) {
+    month=new Date(y.time).getMonth()
+    if (x[month]!=undefined) {
+      x[month].push(y);
+      }
+    else {
+      x[month]=[y];
+      }
+    return x  
+    },{}))
+  
+  console.log(data);
+
+  months=svg.selectAll("g")
     .data(data)
     .enter()
     .append("g")
     .attr("class","month")
-    .attr("id",function(d) {return "group-"+d.month });
+    .attr("id",function(d) {return "group-"+new Date(d[0].time).getMonth() });
   
-  svg.selectAll("g.month")
-    .selectAll("circle")
-    .data(d.entries)
+    months.selectAll("circle")
+    .data(function(d) { return d } )
+    .enter()
     .append("circle")
-    .attr("cy",function(d) { //mood })
+    .attr("cy",function(d) { return yscale(d.score) })
+    .attr("cx",function(d) { dt=new Date(d.time);
+                              t=(dt.getDate()-1)*24*60+
+                                dt.getHours()*60+
+                                dt.getMinutes();
+                              return xscale(t);})
+    .attr("r","5")
+    .append("title")
+    .text(function(d) { return d.note });
 
 }
 </script>
+<script src="data_sorted.json"></script>
 </body>
 </html>
