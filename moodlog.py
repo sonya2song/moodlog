@@ -1,4 +1,5 @@
 import webapp2
+from models import Entry
 
 class MainPage(webapp2.RequestHandler):
   
