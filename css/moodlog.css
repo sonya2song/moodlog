@@ -4,19 +4,27 @@ svg > g.month > path {
   stroke-width: 2px;
   }
 
-svg > g.month, ul#control > li {
+svg > g.month {
   opacity: 0.2
   }
+
+ul#control > li {
+}
 
 svg > g.month:hover, svg> g.selected , ul#control> li:hover, ul#control> li.selected{
   opacity: 1
   }
+
+ul#control> li:hover, ul#control> li.selected{
+  box-shadow: 0px 0px 7px #000;
+}
 
 svg > line.grid {
   stroke: #AAA;
   stroke-width: 1px;
   stroke-dasharray: 5,3;
   }
+
 ul#control {
   list-style: none;
   width: 700px;
@@ -29,15 +37,37 @@ ul#control > li {
   border-radius: 2px;
   float: left;
   text-align: center;
-  margin: 5px;
+  margin: 5px; 
+  color: #FFF;
   }
 
 svg > text.xlabel, svg > text.ylabel {
   font-size: 15px;
   }
 svg > text.xlabel {
-  fill: #AAAAFF;
+  fill: #FFF;
   }
 svg > text.ylabel {
   fill: #AAA;
   }
+
+body {
+   background: #BBBBBB;
+   font-family: helvetica,sans-serif;
+   font-weight: lighter; 
+}
+
+div.tagline {
+   display: inline-block;
+   position: relative;
+   top: -50px;
+   font-size: 110%;
+}
+
+div.tagline > span {
+   background: #35C0CD;
+}
+
+div.heading {
+margin-left: 20px;
+}
