@@ -16,7 +16,7 @@ svg > g.month:hover, svg> g.selected , ul#control> li:hover, ul#control> li.sele
   }
 
 ul#control> li:hover, ul#control> li.selected{
-  box-shadow: 0px 0px 5px #FFF;
+  box-shadow: 0px 0px 7px #000;
 }
 
 svg > line.grid {
@@ -52,7 +52,7 @@ svg > text.ylabel {
   }
 
 body {
-   background: #989998;
+   background: #BBBBBB;
    font-family: helvetica,sans-serif;
    font-weight: lighter; 
 }
@@ -60,11 +60,12 @@ body {
 div.tagline {
    display: inline-block;
    position: relative;
-   top: -55px;
+   top: -50px;
+   font-size: 110%;
 }
 
 div.tagline > span {
-   background: blue;
+   background: #35C0CD;
 }
 
 div.heading {
