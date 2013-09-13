@@ -56,3 +56,17 @@ body {
    font-family: helvetica,sans-serif;
    font-weight: lighter; 
 }
+
+div.tagline {
+   display: inline-block;
+   position: relative;
+   top: -55px;
+}
+
+div.tagline > span {
+   background: blue;
+}
+
+div.heading {
+margin-left: 20px;
+}
