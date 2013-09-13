@@ -141,3 +141,5 @@ function draw(data) {
     .text(function(d) {return month_names[d]})
     .on("click",function(d) {highlight(d)})
 }
+
+d3.json("/api/1/entries",draw)
