@@ -10,11 +10,11 @@ svg > g.month > path {
   stroke-width: 2px;
   }
 
-svg > g.month {
-  opacity: 0.8
+svg > g.month, ul#control > li {
+  opacity: 0.2
   }
 
-svg > g.month:hover {
+svg > g.month:hover, ul#control> li:hover{
   opacity: 1
   }
 
@@ -32,6 +32,8 @@ ul#control > li {
   text-align: center;
   margin: 5px;
   }
+ 
+
 </style>
 </head>
 <body>
@@ -42,6 +44,7 @@ ul#control > li {
 
 <script src="vendor/js/d3.v3.min.js"></script>
 <script src="vendor/js/underscore-min.js"></script>
+<script src="vendor/js/showdown.js"></script>
 <script>
 
 function draw(data) {
