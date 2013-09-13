@@ -1,0 +1,25 @@
+application: moodlogr
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: true
+
+libraries:
+- name: webapp2
+  version: latest
+
+handlers:
+- url: /css
+  static_dir: css
+
+- url: /js
+  static_dir: js
+
+- url: /vendor
+  static_dir: vendor
+
+- url: /data
+  static_dir: data
+
+- url: /.*
+  script: moodlog.application
