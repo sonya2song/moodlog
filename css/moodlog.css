@@ -1,0 +1,28 @@
+svg > g.month > path {
+  fill: none;
+  stroke: #000;
+  stroke-width: 2px;
+  }
+
+svg > g.month, ul#control > li {
+  opacity: 0.2
+  }
+
+svg > g.month:hover, svg> g.selected , ul#control> li:hover, ul#control> li.selected{
+  opacity: 1
+  }
+
+ul#control {
+  list-style: none;
+  width: 700px;
+  }
+
+ul#control > li {
+  display: inline-block;
+  width: 100px;
+  padding: 2px;
+  border-radius: 2px;
+  float: left;
+  text-align: center;
+  margin: 5px;
+  }
