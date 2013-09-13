@@ -52,6 +52,10 @@ svg > text.ylabel {
   fill: #FFF;
   }
 
+svg > rect.popup {
+  fill: #FFF;
+  }
+
 body {
    background: #BBBBBB;
    font-family: helvetica,sans-serif;
@@ -75,4 +79,11 @@ margin-left: 20px;
 
 img.logo {
   height: 110px;
+  }
+
+div.popup {
+  background: #FFF;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 75%;
   }

@@ -130,6 +130,10 @@ function draw(data) {
     .append("g")
     .attr("class","month")
     .attr("id",function(d) {return "group-"+d[0].month })
+
+  months.append("path")
+    .attr("d",function(d) { return line(d) })
+    .attr("style",function(d) { return "stroke: "+d[0].color})
     .on("click",function(d) {highlight(d[0].month)});
   
     months.selectAll("circle")
@@ -140,12 +144,25 @@ function draw(data) {
     .attr("cx",function(d) { return d.x})
     .attr("r","5")
     .attr("style", function(d) { return "fill: "+d.color })
-    .append("title")
-    .text(function(d) { return d.note });
+    .on("click",function(d) {
+      d3.selectAll(".popup").remove()
+      svg.append("switch")
+        .attr("class","popup")
+        .append("foreignObject")
+        .attr("x",d.x)
+        .attr("y",d.y)
+        .attr("rx",10)
+        .attr("ry",10)
+        .attr("width",200)
+        .attr("height",150)
+        .append("xhtml:body")
+        .html("<div class='popup'>"+ d.note +"</div>")
+
+      d3.selectAll("div.popup").on("click",function(d) {
+        d3.selectAll(".popup").remove()
+        })
+      })
   
-  months.append("path")
-    .attr("d",function(d) { return line(d) })
-    .attr("style",function(d) { return "stroke: "+d[0].color});
 
   
   d3.select("#control").selectAll("li")
@@ -156,6 +173,7 @@ function draw(data) {
     .attr("style",function(d) { return "background: "+color(d)})
     .text(function(d) {return month_names[d]})
     .on("click",function(d) {highlight(d)})
+
 }
 
 d3.json("/api/1/entries",draw)
