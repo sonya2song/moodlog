@@ -13,7 +13,21 @@ function draw(data) {
     .attr("height",height);
   
   
-  var color=d3.scale.category20();
+  var color=function(n) {
+	cs=["#FF5600",
+	    "#58026D",
+	    "#049B15",
+	    "#FFCA00",
+            "#000000",
+            "#35C0CD",
+            "#F40B9B",
+            "#028C7B",
+            "#FF0D00",
+            "#E51743",
+            "#2F00D8",
+	    "#80E800"]
+	    return cs[n];
+		};
 
   yscale=d3.scale.linear()
     .domain([1,10])
