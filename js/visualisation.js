@@ -1,7 +1,8 @@
 function draw(data) {
-  var width=1000;
-  var height=600;
+  var width=1400;
+  var height=350;
   var distance=50;
+  var leftdistance=75;
 
   var month_names=["January","February","March","April","May",
     "June","July","August","September","October","November",
@@ -35,7 +36,7 @@ function draw(data) {
 
   xscale=d3.scale.linear()
     .domain([0,30*24*60])
-    .range([distance,width-distance])
+    .range([leftdistance,width-distance])
 
    
   data=_.map(data,function(d) {
@@ -82,7 +83,7 @@ function draw(data) {
     .append("line")
     .attr("class","ygrid")
     .attr("class","grid")
-    .attr("x1",20)
+    .attr("x1",50)
     .attr("x2",width-20)
     .attr("y1",function(d) {return yscale(d)})
     .attr("y2",function(d) {return yscale(d)})
@@ -112,9 +113,10 @@ function draw(data) {
     .data([1,10])
     .enter()
     .append("text")
-    .attr("x",20)
+    .attr("x",50)
     .attr("y",function(d) {return yscale(d) })
     .attr("class","ylabel")
+    .attr("text-anchor","end")
     .attr("dy",function(d) { if (d<5) {return -7}
                              else {
                               return 14
