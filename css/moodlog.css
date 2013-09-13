@@ -12,6 +12,11 @@ svg > g.month:hover, svg> g.selected , ul#control> li:hover, ul#control> li.sele
   opacity: 1
   }
 
+svg > line.grid {
+  stroke: #AAA;
+  stroke-width: 1px;
+  stroke-dasharray: 5,3;
+  }
 ul#control {
   list-style: none;
   width: 700px;
@@ -25,4 +30,14 @@ ul#control > li {
   float: left;
   text-align: center;
   margin: 5px;
+  }
+
+svg > text.xlabel, svg > text.ylabel {
+  font-size: 15px;
+  }
+svg > text.xlabel {
+  fill: #AAAAFF;
+  }
+svg > text.ylabel {
+  fill: #AAA;
   }

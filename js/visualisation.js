@@ -1,5 +1,5 @@
 function draw(data) {
-  var width=800;
+  var width=1000;
   var height=600;
   var distance=50;
 
@@ -12,7 +12,6 @@ function draw(data) {
     .attr("width",width)
     .attr("height",height);
   
-  console.log(data);
   
   var color=d3.scale.category20();
 
@@ -62,6 +61,52 @@ function draw(data) {
   line=d3.svg.line()
     .x(function(d) { return d.x })
     .y(function(d) { return d.y });
+  
+  ygrid=svg.selectAll("line.ygrid")
+    .data(_.range(1,11))
+    .enter()
+    .append("line")
+    .attr("class","ygrid")
+    .attr("class","grid")
+    .attr("x1",20)
+    .attr("x2",width-20)
+    .attr("y1",function(d) {return yscale(d)})
+    .attr("y2",function(d) {return yscale(d)})
+  
+  xgrid=svg.selectAll("line.xgrid")
+    .data(_.range(0,31))
+    .enter()
+    .append("line")
+    .attr("class","xgrid")
+    .attr("class","grid")
+    .attr("x1",function(d) {return xscale(d*24*60)})
+    .attr("x2",function(d) {return xscale(d*24*60)})
+    .attr("y1",20)
+    .attr("y2",height-20)
+
+  xlabel=svg.selectAll("text.xlabel")
+    .data(_.range(0,31))
+    .enter()
+    .append("text")
+    .attr("x",function(d) { return xscale(d*24*60) })
+    .attr("y",height-23)
+    .attr("dx",1)
+    .attr("class","xlabel")
+    .text(function(d) { return d+1})
+  
+  ylabel=svg.selectAll("text.ylabel")
+    .data([1,10])
+    .enter()
+    .append("text")
+    .attr("x",20)
+    .attr("y",function(d) {return yscale(d) })
+    .attr("class","ylabel")
+    .attr("dy",function(d) { if (d<5) {return -7}
+                             else {
+                              return 14
+                              }})
+    .text(function(d) { if (d==1) { return "happy" }
+      else { return "sad" }})
 
   months=svg.selectAll("g.month")
     .data(data)
