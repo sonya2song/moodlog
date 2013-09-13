@@ -1,0 +1,14 @@
+1. Orange #FF5600
+2. purple #58026D
+3. green (dark) #049B15
+4. Yellow #FFCA00
+5. black #000000
+6. blue (light) #35C0CD
+7. pink #F40B9B
+8. green-blue #028C7B
+9. red #FF0D00
+10. salmon #E51743
+11. blue #2F00D8
+12. green (light) #80E800
+
+background gray #989998
