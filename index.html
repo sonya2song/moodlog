@@ -14,7 +14,7 @@ svg > g.month, ul#control > li {
   opacity: 0.2
   }
 
-svg > g.month:hover, ul#control> li:hover{
+svg > g.month:hover, svg> g.selected , ul#control> li:hover, ul#control> li.selected{
   opacity: 1
   }
 
@@ -80,13 +80,14 @@ function draw(data) {
     t=(dt.getDate()-1)*24*60+
       dt.getHours()*60+
       dt.getMinutes();
+    d["month"]=dt.getMonth();  
     d["x"]=xscale(t);
-    d["color"]=color(dt.getMonth());
+    d["color"]=color(d.month);
     return d;
     })
 
   data=_.values(_.reduce(data,function(x,y) {
-    month=new Date(y.time).getMonth()
+    month=y.month
     if (x[month]!=undefined) {
       x[month].push(y);
       }
@@ -95,6 +96,17 @@ function draw(data) {
       }
     return x  
     },{}))
+
+  highlight = function(month) {
+    if (d3.select("#sel-"+month).attr('class')=="selected") {
+      d3.select("#sel-"+month).attr('class',"");
+      d3.select("#group-"+month).attr('class','month');
+      }
+    else {
+      d3.select("#sel-"+month).attr('class',"selected");
+      d3.select("#group-"+month).attr('class','month selected');
+      }
+    }
  
   line=d3.svg.line()
     .x(function(d) { return d.x })
@@ -105,7 +117,8 @@ function draw(data) {
     .enter()
     .append("g")
     .attr("class","month")
-    .attr("id",function(d) {return "group-"+new Date(d[0].time).getMonth() });
+    .attr("id",function(d) {return "group-"+d[0].month })
+    .on("click",function(d) {highlight(d[0].month)});
   
     months.selectAll("circle")
     .data(function(d) { return d } )
@@ -127,9 +140,10 @@ function draw(data) {
     .data([0,1,2,3,4,5,6,7,8,9,10,11])
     .enter()
     .append("li")
-    .attr("id",function(d) { return (d) })
+    .attr("id",function(d) { return ("sel-"+d) })
     .attr("style",function(d) { return "background: "+color(d)})
     .text(function(d) {return month_names[d]})
+    .on("click",function(d) {highlight(d)})
 }
 </script>
 <script src="data_sorted.json"></script>
