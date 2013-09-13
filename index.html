@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Electrocardiogr_ama</title>
+<style>
+</style>
+</head>
+<body>
+
+<div id="graph">
+</div>
+
+<script src="vendor/js/d3.v3.min.js"></script>
+<script src="vendor/js/underscore-min.js"></scripts>
+<script>
+
+function draw(data) {
+  var width=800;
+  var height=600;
+
+  var svg=d3.select("#graph")
+    .attr("width",width)
+    .attr("height",height);
+  
+  // cluster by months using underscore
+
+  svg.selectAll("g")
+    .data(data)
+    .enter()
+    .append("g")
+    .attr("class","month")
+    .attr("id",function(d) {return "group-"+d.month });
+  
+  svg.selectAll("g.month")
+    .selectAll("circle")
+    .data(d.entries)
+    .append("circle")
+    .attr("cy",function(d) { //mood })
+
+}
+</script>
+</body>
+</html>
