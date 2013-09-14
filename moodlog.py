@@ -52,9 +52,9 @@ class Entries(webapp2.RequestHandler):
       entry.note=self.request.get('note')
       entry.score=float(self.request.get('score'))
       entry.put()
-      self.response.write("""{status: "success" }""")
+      self.response.write("""{"status": "success" }""")
     else:
-      self.response.write("""{status: "error", reason: "need to log
+      self.response.write("""{"status": "error", reason: "need to log
       in"}""")
       
 

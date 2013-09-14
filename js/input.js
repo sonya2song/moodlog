@@ -106,7 +106,19 @@ function sbmt() {
     xh.send("note="+note+"&score="+score)
     xh.onreadystatechange=function() {
       console.log(xh.readyState)
+      if (xh.readyState==4 && xh.status==200){ 
+          response=JSON.parse(xh.responseText);
+          if (response.status=="success") {
+            window.location.href="/view"; }
+          else {
+            window.location.href="/";
+            }
+          }
     }
+    d3.select("#submitbutton a").remove()
+    d3.select("#submitbutton").append("img")
+      .attr("src","img/submit.png")
+      .attr("style","opacity: 0.2");
     
     })
   }
