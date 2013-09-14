@@ -9,9 +9,9 @@ jenv=Environment(loader=FileSystemLoader("templates"))
 class MainPage(webapp2.RequestHandler):
   
   def get(self):
-    f=open("index.html")
+    t=jenv.get_template("visualisation.html")
     self.response.headers['Content-type']="text/html ;charset=utf-8"
-    self.response.write(f.read())
+    self.response.write(t.render())
 
 class Entries(webapp2.RequestHandler):
   '''getting and creating entries'''  
@@ -27,9 +27,9 @@ class Entries(webapp2.RequestHandler):
 
 class Input(webapp2.RequestHandler):
   def get(self):
-    f=open("input.html")
+    f=jenv.get_template("input.html")
     self.response.headers['Content-type']="text/html ;charset=utf-8"
-    self.response.write(f.read())
+    self.response.write(t.render())
 
 
 application= webapp2.WSGIApplication([
