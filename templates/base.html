@@ -9,11 +9,22 @@ medium="screen" />
 </head>
 <body>
 <div class="heading"> 
+<div class="title">
     <img class="logo" src="img/moodlog_.png" /> 
     <div class="tagline"> 
        how do you <span>feel</span> now?<br/>
        create a graphic memory of <span>yourself</span>!
      </div>
+</div>     
+{% if user %}
+<ul class="menu">
+<li><a href="/log"><img src="img/log.png" title="log how you feel now"></a></li>
+<li><a href="/view"><img src="img/view.png" title="view your graphical
+memory" /></a></li>
+<li><a href="{{logouturl}}"><img src="img/logout.svg" title="logout"
+alt="logout" width="30px"/></a></li>
+</ul>
+{% endif %}
 </div>
 <div class="content">
 {% block content %}

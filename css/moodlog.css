@@ -64,12 +64,10 @@ body {
 
 div.tagline {
    display: inline-block;
-   position: relative;
-   top: -10px;
    font-size: 110%;
 }
 
-div.tagline > span {
+div.tagline > span, div.explanation > span {
    background: #35C0CD;
 }
 
@@ -86,4 +84,30 @@ div.popup {
   padding: 10px;
   border-radius: 5px;
   font-size: 75%;
+  }
+
+div.heading > div.title {
+  width: 450px;
+  float: left;
+  }
+
+div.heading > ul.menu {
+  width: 200px;
+  float: right;
+  list-style: none;
+  }
+
+div.content { 
+  clear: both;
+  position: relative;
+  top: 10px;
+  }
+div.footnote {
+  margin-top: 30px;
+  font-size: 70%;
+  }
+
+ul.menu > li {
+  display: inline-block;
+  width: 30px;
   }
