@@ -93,8 +93,8 @@ div.heading > div.title {
 
 div.heading > ul.menu {
   width: 200px;
-  float: right;
   list-style: none;
+  float: left;
   }
 
 div.content { 
