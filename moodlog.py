@@ -46,8 +46,13 @@ class Entries(webapp2.RequestHandler):
     user=users.get_current_user()
     self.response.headers['Content-type']="application/json"
     if user:
-      note=self.request.get('note')
-      score=self.request.get('score')
+      p=ndb.Key("user-email",user.email())
+      entry=Entry(parent=p)
+      entry.author=user;
+      entry.note=self.request.get('note')
+      entry.score=float(self.request.get('score'))
+      entry.put()
+      self.response.write("""{status: "success" }""")
     else:
       self.response.write("""{status: "error", reason: "need to log
       in"}""")

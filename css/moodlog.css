@@ -111,3 +111,11 @@ ul.menu > li {
   display: inline-block;
   width: 30px;
   }
+
+#input > #graph {
+  float: left;
+  }
+
+#input > #form {
+  float: left;
+  }

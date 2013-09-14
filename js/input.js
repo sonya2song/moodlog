@@ -1,6 +1,6 @@
-function draw(data) {
-  var width=1000;
-  var height=600;
+function draw() {
+  var width=200;
+  var height=300;
   var distance=50;
 
   var svg=d3.select("#graph")
@@ -64,4 +64,14 @@ function draw(data) {
 
 
 
-
+function sbmt() {
+  score=document.getElementById("score").value;
+  note=document.getElementById("note").value;
+  xh=new XMLHttpRequest();
+  xh.open("POST","/api/1/entries",true);
+  xh.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+  xh.send("note="+note+"&score="+score)
+  xh.onreadystatechange=function() {
+    console.log(xh.readyState)
+    }
+  }

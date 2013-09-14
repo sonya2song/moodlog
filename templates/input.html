@@ -2,11 +2,17 @@
 
 {% block title %}- how do you feel? {% endblock %}
 {% block content %}
+<div id="input">
 <div id="graph">
 </div>
-<ul id="control">
-</ul>
-
+<div id="form">
+<form id="inputform">
+<input id="score" type="text" name="score" />
+<textarea id="note" name="note" maxlength="500"></textarea>
+<div onclick="sbmt()" class="button">submit</div>
+</form>
+</div>
+</div>
 {% endblock %}
 
 {% block script %}
