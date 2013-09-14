@@ -27,7 +27,7 @@ class Entries(webapp2.RequestHandler):
 
 class Input(webapp2.RequestHandler):
   def get(self):
-    f=jenv.get_template("input.html")
+    t=jenv.get_template("input.html")
     self.response.headers['Content-type']="text/html ;charset=utf-8"
     self.response.write(t.render())
 

@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Moodlog - {% block title %}{% endblock %}</title>
+<title>Moodlog {% block title %}{% endblock %}</title>
 <link rel="stylesheet" href="css/moodlog.css" type="text/css"
 medium="screen" />
 {% block head %}
 {% endblock %}
 </head>
 <body>
+<div class="heading"> 
+    <img class="logo" src="img/moodlog_.png" /> 
+    <div class="tagline"> 
+       how do you <span>feel</span> now?<br/>
+       create a graphic memory of <span>yourself</span>!
+     </div>
+</div>
 <div class="content">
 {% block content %}
 {% endblock %}

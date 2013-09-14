@@ -1,24 +1,16 @@
-<html>
-<head>
-<title>Electrocardiogr_ama</title>
-<link rel="stylesheet" href="css/moodlog.css" type="text/css"
-medium="screen" />
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}- how do you feel? {% endblock %}
+{% block content %}
 <div id="graph">
 </div>
 <ul id="control">
 </ul>
 
-<script src="vendor/js/d3.v3.min.js"></script>
-<!--
-<script src="vendor/js/underscore-min.js"></script>
-<script src="js/visualisation.js"></script>
-<script src="vendor/js/jquery-1.10.2.min.js"></script>
+{% endblock %}
 
--->
-<script src="vendor/js/showdown.js"></script>
+{% block script %}
+<script src="vendor/js/d3.v3.min.js"></script>
 <script src="js/input.js"></script>
-<script>draw(null);</script>
-</body>
-</html>
+<script>window.onload=draw();</script>
+{% endblock %}

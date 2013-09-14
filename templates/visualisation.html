@@ -1,26 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Electrocardiogr_ama</title>
-<link rel="stylesheet" href="css/moodlog.css" type="text/css"
-medium="screen" />
-</head>
-<body>
-<div class="heading">
-    <img class="logo" src="img/moodlog_.png" />
-        <div class="tagline">
-            how do you <span>feel</span> now?<br/>
-            create a graphic memory of <span>yourself</span>!
-            </div>
-    </div>
+{% extends "base.html" %}
+{% block title %}- your grapic self{% endblock %}
+{% block content %}
 <div id="graph">
 </div>
 <ul id="control">
 </ul>
+{% endblock %}
 
+{% block script %}
 <script src="vendor/js/d3.v3.min.js"></script>
 <script src="vendor/js/underscore-min.js"></script>
 <script src="vendor/js/showdown.js"></script>
 <script src="js/visualisation.js"></script>
-</body>
-</html>
+
+{% endblock %}
