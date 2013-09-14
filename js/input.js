@@ -9,32 +9,71 @@ function draw() {
     .attr("height",height);
 	
 	var xcenter = 100;
-	var ycenter = 100;
+	var ycenter = 150;
 	var rface = 50;
-	var reye = 10;
-	var xdisteye = 20;
+	var reye = 7;
+	var xdisteye = 15;
 	var ydisteye = 10;
 	var xdistmouth = 20;
 	var ydistmouth = 20;
-	var delta = 10;
+  
+  var deltascale=d3.scale.linear()
+        .domain([rface+2,height-rface-2])
+        .range([-10,10])
 
-	var smiley=svg.append("circle")
-		.attr("cx", xcenter)
-		.attr("cy", ycenter)
+  var delta=function(d) {
+  if (d==undefined) {
+    return 0;
+  }
+  else {
+    return deltascale(d.y);
+    }
+  }
+	
+  var line=d3.svg.line()
+		.x(function(d) { return d.x })
+		.y(function(d) { return d.y })
+		.interpolate("basis-open")
+
+  var mouthline=function(d) {
+		return(line([{x:(-xdistmouth),y:ydistmouth+delta(d)},{x:0,y:ydistmouth-delta(d)},{x:xdistmouth,
+    y:ydistmouth+delta(d)}]))
+     
+    }
+
+  var drag = d3.behavior.drag()
+        .on("drag", function(d,i) {
+            d.y+=d3.event.dy
+            if (d.y > height-rface) {
+               d.y=height-rface-2;
+               }
+            if (d.y < rface) {
+               d.y=rface+2
+               }
+            d3.select(this).attr("transform", function(d,i){
+                return "translate(" + [ d.x,d.y ] + ")"
+            });
+            d3.select("#mouth").attr("d",mouthline(d));
+        });
+
+	var smiley=svg.append("g")
+    .data([{"x":xcenter,"y":ycenter}])
+    .attr("transform",function(d) { return("translate("+[d.x,d.y]+")")})
+    .call(drag)
+
+  smiley.append("circle")
+		.attr("cx", 0)
+		.attr("cy", 0)
 		.attr("r", rface)
-		.attr("style", "stroke:#000; stroke-width:1.5px; fill:#FF0")
-//		.on("dragover",function(e){
-//	    	console.log("X: "+e.pageX+" Y: "+e.pageY);
-// 			alert("dragable!");
-// 		})
+		.attr("style", "stroke:#000; stroke-width:1.5px; fill:#FFCA00")
 
-	var smiley=svg.selectAll("circle.eye")
+	smiley.selectAll("circle.eye")
 		.data([-1,1])
 		.enter()
 		.append("circle")
 		.attr("class","eye")
-		.attr("cx", function(d) { return xcenter - (xdisteye*d)})
-		.attr("cy", ycenter - ydisteye)
+		.attr("cx", function(d) { return (xdisteye*d)})
+		.attr("cy", - ydisteye)
 		.attr("r", reye)
 		.attr("style", "stroke:#000; stroke-width:1.5px; fill:#000");
 	
@@ -43,21 +82,10 @@ function draw() {
 		.y(function(d) { return d.y })
 		.interpolate("basis")
 		
-	var mouth=svg
-	.append("path")
-		.attr("d",line([{x:(xcenter-xdistmouth),y:ycenter+ydistmouth+delta},{x:xcenter,y:ycenter+ydistmouth},{x:xcenter+xdistmouth, y:ycenter+ydistmouth+delta}]))
-		.attr("style", "stroke:#000; stroke-width:1.5px; fill:#000");
-
-/*
-	var smiley=svg.selectAll("circle")
-		.data([3])
-		.enter()
-		.append("circle")
-		.attr("cx", xcenter + xdisteye)
-		.attr("cy", ycenter - ydisteye)
-		.attr("r", reye)
-		.attr("style", "stroke:#000; stroke-width:1.5px; fill:#F00");
-*/
+	var mouth=smiley.append("path")
+    .attr("id","mouth")
+		.attr("d",mouthline)
+		.attr("style", "stroke:#000; stroke-width:2px;");
 
 }
 
@@ -65,13 +93,20 @@ function draw() {
 
 
 function sbmt() {
-  score=document.getElementById("score").value;
+  smilescale=d3.scale.linear()
+    .domain([50,250])
+    .range([1,10])
+
   note=document.getElementById("note").value;
-  xh=new XMLHttpRequest();
-  xh.open("POST","/api/1/entries",true);
-  xh.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-  xh.send("note="+note+"&score="+score)
-  xh.onreadystatechange=function() {
-    console.log(xh.readyState)
+  d3.select("svg > g").each(function(d) {
+    score=smilescale(d.y);
+    xh=new XMLHttpRequest();
+    xh.open("POST","/api/1/entries",true);
+    xh.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xh.send("note="+note+"&score="+score)
+    xh.onreadystatechange=function() {
+      console.log(xh.readyState)
     }
+    
+    })
   }

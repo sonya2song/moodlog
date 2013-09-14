@@ -15,6 +15,10 @@ svg > g.month:hover, svg> g.selected , ul#control> li:hover, ul#control> li.sele
   opacity: 1
   }
 
+svg  #mouth {
+  fill: none;
+  }
+
 ul#control> li:hover, ul#control> li.selected{
   box-shadow: 0px 0px 7px #000;
 }
@@ -118,4 +122,13 @@ ul.menu > li {
 
 #input > #form {
   float: left;
+  }
+
+#input  textarea {
+  width: 200px;
+  height: 200px;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  resize: none;
   }
