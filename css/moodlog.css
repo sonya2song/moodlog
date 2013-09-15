@@ -132,3 +132,8 @@ ul.menu > li {
   border: none;
   resize: none;
   }
+
+svg > g.arrow > line {
+  stroke: #000;
+  stroke-width: 2px;
+  }

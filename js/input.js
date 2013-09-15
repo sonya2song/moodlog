@@ -16,6 +16,9 @@ function draw() {
 	var ydisteye = 10;
 	var xdistmouth = 20;
 	var ydistmouth = 20;
+  var arrowlength = 50;
+  var xdtip = 10;
+  var ydtip = 10;
   
   var deltascale=d3.scale.linear()
         .domain([rface+2,height-rface-2])
@@ -43,6 +46,7 @@ function draw() {
 
   var drag = d3.behavior.drag()
         .on("drag", function(d,i) {
+            d3.select("g.arrow").remove();
             d.y+=d3.event.dy
             if (d.y > height-rface) {
                d.y=height-rface-2;
@@ -58,6 +62,7 @@ function draw() {
 
 	var smiley=svg.append("g")
     .data([{"x":xcenter,"y":ycenter}])
+    .attr("id","smiley")
     .attr("transform",function(d) { return("translate("+[d.x,d.y]+")")})
     .call(drag)
 
@@ -87,6 +92,31 @@ function draw() {
 		.attr("d",mouthline)
 		.attr("style", "stroke:#000; stroke-width:2px;");
 
+  
+  var arrow=svg.selectAll("g.arrow")
+    .data([0,1])
+    .enter()
+    .append("g")
+    .attr("class","arrow")
+    .attr("transform",function(d) { if (d) { of=1 } else {of=-1} ;return "translate("+
+          [xcenter,ycenter-(rface+5) * of]+") rotate("+180*d+")" })
+          
+  arrow.append("line")
+    .attr("x1",0)
+    .attr("x2",0)
+    .attr("y1",0)
+    .attr("y2",arrowlength)
+ 
+  arrow.selectAll("line.tip")
+    .data([1,-1])
+    .enter()
+    .append("line")
+    .attr("class","tip")
+    .attr("x1",0)
+    .attr("x2",function(d) { return xdtip*d })
+    .attr("y1",arrowlength)
+    .attr("y2",arrowlength-ydtip)
+
 }
 
 
@@ -98,7 +128,7 @@ function sbmt() {
     .range([1,10])
 
   note=document.getElementById("note").value;
-  d3.select("svg > g").each(function(d) {
+  d3.select("svg > g#smiley").each(function(d) {
     score=smilescale(d.y);
     xh=new XMLHttpRequest();
     xh.open("POST","/api/1/entries",true);
