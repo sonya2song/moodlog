@@ -1,4 +1,5 @@
 import webapp2
+import json
 from jinja2 import Environment,FileSystemLoader
 from models import Entry
 from google.appengine.api import users
@@ -34,9 +35,12 @@ class Entries(webapp2.RequestHandler):
     user=users.get_current_user()
     self.response.headers['Content-type']="application/json"
     if user:
-      f=open("data/data_sorted.json")
-      self.response.write(f.read())
-      f.close()
+      p=ndb.Key("user-email",user.email())
+      entries_query=Entry.query(ancestor=p).order(Entry.time)
+      entries=entries_query.fetch()
+      entries=[{"time":e.time.isoformat(), "note":e.note, "score":e.score} for e in
+      entries]
+      self.response.write(json.dumps(entries))
     else:
       self.response.write("""{status: "error", reason: "need to log
       in"}""")
