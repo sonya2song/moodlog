@@ -118,6 +118,7 @@ ul.menu > li {
 
 #input > #graph {
   float: left;
+  width: 200px;
   }
 
 #input > #form {
