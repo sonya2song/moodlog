@@ -41,3 +41,7 @@ svg > text.xlabel {
 svg > text.ylabel {
   fill: #AAA;
   }
+
+svg  #mouth   {
+  fill: none;
+  }
