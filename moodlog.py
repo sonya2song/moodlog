@@ -14,6 +14,7 @@ class Visualisation(webapp2.RequestHandler):
     if user:
       t=jenv.get_template("visualisation.html")
       self.response.headers['Content-type']="text/html ;charset=utf-8"
+      self.response.headers.add_header('cache-control','public, max-age=7200')
       self.response.write(t.render(user=user,logouturl=users.create_logout_url("/")))
     else: 
       self.redirect("/")
@@ -27,6 +28,7 @@ class MainPage(webapp2.RequestHandler):
     else:
       t=jenv.get_template("start.html")
       self.response.headers['Content-type']="text/html; charset=utf-8"
+      self.response.headers.add_header('cache-control','public, max-age=7200')
       self.response.write(t.render(loginlink=users.create_login_url(self.request.uri)))
 
 class Entries(webapp2.RequestHandler):
@@ -68,6 +70,7 @@ class Input(webapp2.RequestHandler):
     if user:
       t=jenv.get_template("input.html")
       self.response.headers['Content-type']="text/html ;charset=utf-8"
+      self.response.headers.add_header('cache-control','public, max-age=7200')
       self.response.write(t.render(user=user,logouturl=users.create_logout_url("/")))
     else:
       self.redirect("/")
