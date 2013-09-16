@@ -42,7 +42,7 @@ class MainPage(webapp2.RequestHandler):
         t=jenv.get_template("start.html")
         self.response.write(
           cache.set("start",
-            t.render(loginlink=users.create_login_url(self.request.uri))))
+            t.render(loginlink=users.create_login_url('/log'))))
       else:
         self.response.write(p)
      
