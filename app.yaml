@@ -13,15 +13,19 @@ libraries:
 handlers:
 - url: /css
   static_dir: css
+  expiration: 1h
 
 - url: /js
   static_dir: js
+  expiration: 1h
 
 - url: /img
   static_dir: img
+  expiration: 1h
 
 - url: /vendor
   static_dir: vendor
+  expiration: 5h
 
 - url: /.*
   script: moodlog.application
