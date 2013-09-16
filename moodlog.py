@@ -1,5 +1,6 @@
 import webapp2
 import json
+import datetime
 from jinja2 import Environment,FileSystemLoader
 from models import Entry
 from google.appengine.api import users
@@ -38,7 +39,9 @@ class Entries(webapp2.RequestHandler):
     self.response.headers['Content-type']="application/json"
     if user:
       p=ndb.Key("user-email",user.email())
-      entries_query=Entry.query(ancestor=p)
+      nw=datetime.datetime.now()
+      oy=datetime.datetime(nw.year-1,nw.month+1,1,0,0)
+      entries_query=Entry.query(Entry.time >=oy,ancestor=p)
       entries=entries_query.fetch()
       entries=[{"time":e.time.isoformat(), "note":e.note, "score":e.score} for e in
       entries]
