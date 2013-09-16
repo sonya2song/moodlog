@@ -174,7 +174,8 @@ function draw(data) {
     .attr("style",function(d) { return "background: "+color(d)})
     .text(function(d) {return month_names[d]})
     .on("click",function(d) {highlight(d)})
-
+  
+  highlight(new Date().getMonth());
 }
 
 d3.json("/api/1/entries",draw)
