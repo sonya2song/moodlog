@@ -38,7 +38,7 @@ class Entries(webapp2.RequestHandler):
     self.response.headers['Content-type']="application/json"
     if user:
       p=ndb.Key("user-email",user.email())
-      entries_query=Entry.query(ancestor=p).order(Entry.time)
+      entries_query=Entry.query(ancestor=p)
       entries=entries_query.fetch()
       entries=[{"time":e.time.isoformat(), "note":e.note, "score":e.score} for e in
       entries]

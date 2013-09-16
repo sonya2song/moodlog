@@ -38,7 +38,8 @@ function draw(data) {
     .domain([0,30*24*60])
     .range([leftdistance,width-distance])
 
-   
+  data=_.sortBy(data,function(d) {  
+    return d.time})
   data=_.map(data,function(d) {
     d["y"]=yscale(d.score);
     dt=new Date(d.time);
