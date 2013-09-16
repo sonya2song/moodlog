@@ -3,21 +3,27 @@ import json
 import datetime
 from jinja2 import Environment,FileSystemLoader
 from models import Entry
+from instancecache import InstanceCache
 from google.appengine.api import users
 from google.appengine.ext import ndb
 
 jenv=Environment(loader=FileSystemLoader("templates"))
+cache=InstanceCache()
 
 class Visualisation(webapp2.RequestHandler):
   
   def get(self):
     user=users.get_current_user()
     if user:
-      t=jenv.get_template("visualisation.html")
       self.response.headers['Content-type']="text/html ;charset=utf-8"
       self.response.headers.add_header('Cache-Control','public, max-age=7200')
       self.response.headers['Pragma'] = 'Public'
-      self.response.write(t.render(user=user,logouturl=users.create_logout_url("/")))
+      p=cache.get("visualisation")
+      if not p:
+        t=jenv.get_template("visualisation.html")
+        self.response.write(cache.set("visualisation",t.render(user=user,logouturl=users.create_logout_url("/"))))
+      else:
+        self.response.write(p)
     else: 
       self.redirect("/")
 
@@ -28,11 +34,18 @@ class MainPage(webapp2.RequestHandler):
     if user:
       self.redirect("/log")
     else:
-      t=jenv.get_template("start.html")
+      p=cache.get("start")
       self.response.headers['Content-type']="text/html; charset=utf-8"
       self.response.headers.add_header('Cache-Control','public, max-age=7200')
       self.response.headers['Pragma'] = 'Public'
-      self.response.write(t.render(loginlink=users.create_login_url(self.request.uri)))
+      if not p:
+        t=jenv.get_template("start.html")
+        self.response.write(
+          cache.set("start",
+            t.render(loginlink=users.create_login_url(self.request.uri))))
+      else:
+        self.response.write(p)
+     
 
 class Entries(webapp2.RequestHandler):
   '''getting and creating entries'''  
@@ -73,11 +86,16 @@ class Input(webapp2.RequestHandler):
   def get(self):
     user=users.get_current_user()
     if user:
-      t=jenv.get_template("input.html")
       self.response.headers['Content-type']="text/html ;charset=utf-8"
       self.response.headers.add_header('Cache-Control','public, max-age=7200')
       self.response.headers['Pragma'] = 'Public'
-      self.response.write(t.render(user=user,logouturl=users.create_logout_url("/")))
+      p=cache.get("input")
+      if not p:
+        t=jenv.get_template("input.html")
+        self.response.write(
+          cache.set("input",t.render(user=user,logouturl=users.create_logout_url("/"))))
+      else:
+        self.response.write(p)
     else:
       self.redirect("/")
 
