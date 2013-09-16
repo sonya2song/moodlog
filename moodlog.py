@@ -16,7 +16,7 @@ class Visualisation(webapp2.RequestHandler):
     user=users.get_current_user()
     if user:
       self.response.headers['Content-type']="text/html ;charset=utf-8"
-      self.response.headers.add_header('Cache-Control','public, max-age=7200')
+      self.response.headers['Cache-Control']='public, max-age=7200'
       self.response.headers['Pragma'] = 'Public'
       p=cache.get("visualisation")
       if not p:
@@ -36,7 +36,7 @@ class MainPage(webapp2.RequestHandler):
     else:
       p=cache.get("start")
       self.response.headers['Content-type']="text/html; charset=utf-8"
-      self.response.headers.add_header('Cache-Control','public, max-age=7200')
+      self.response.headers['Cache-Control']='public, max-age=7200'
       self.response.headers['Pragma'] = 'Public'
       if not p:
         t=jenv.get_template("start.html")
@@ -87,7 +87,7 @@ class Input(webapp2.RequestHandler):
     user=users.get_current_user()
     if user:
       self.response.headers['Content-type']="text/html ;charset=utf-8"
-      self.response.headers.add_header('Cache-Control','public, max-age=7200')
+      self.response.headers['Cache-Control']='public, max-age=7200'
       self.response.headers['Pragma'] = 'Public'
       p=cache.get("input")
       if not p:
