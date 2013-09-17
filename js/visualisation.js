@@ -38,6 +38,13 @@ function draw(data) {
     .domain([0,30*24*60])
     .range([leftdistance,width-distance])
 
+  hexagon=d3.svg.line()
+    .x(function(d) { return d.x})
+    .y(function(d) { return d.y})
+    .interpolate("linear")(
+      _.map([1,2,3,4,5,6],function(d){ return({x:
+      Math.sin(Math.PI/3*d)*5, y: Math.cos(Math.PI/3*d)*5})}))
+  
   data=_.sortBy(data,function(d) {  
     return d.time})
   data=_.map(data,function(d) {
@@ -137,13 +144,13 @@ function draw(data) {
     .attr("style",function(d) { return "stroke: "+d[0].color})
     .on("click",function(d) {highlight(d[0].month)});
   
-    months.selectAll("circle")
+  months.selectAll("path.point")
     .data(function(d) { return d } )
     .enter()
-    .append("circle")
-    .attr("cy",function(d) { return d.y})
-    .attr("cx",function(d) { return d.x})
-    .attr("r","5")
+    .append("path")
+    .attr("class","point")
+    .attr("d",hexagon)
+    .attr("transform",function(d) { return "translate("+[d.x,d.y]+")" })
     .attr("style", function(d) { return "fill: "+d.color })
     .on("click",function(d) {
       d3.selectAll(".popup").remove()

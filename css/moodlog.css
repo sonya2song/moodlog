@@ -19,6 +19,10 @@ svg  #mouth {
   fill: none;
   }
 
+svg > g.month > path.point {
+  stroke: none;
+  }
+
 ul#control> li:hover, ul#control> li.selected{
   box-shadow: 0px 0px 7px #000;
 }
@@ -50,10 +54,10 @@ svg > text.xlabel, svg > text.ylabel {
   font-size: 15px;
   }
 svg > text.xlabel {
-  fill: #FFF;
+  fill: #000;
   }
 svg > text.ylabel {
-  fill: #FFF;
+  fill: #000;
   }
 
 svg > rect.popup {
@@ -88,6 +92,7 @@ div.popup {
   padding: 10px;
   border-radius: 5px;
   font-size: 75%;
+  box-shadow: 1px 1px 5px #000;
   }
 
 div.heading > div.title {
@@ -130,7 +135,7 @@ ul.menu > li {
   height: 200px;
   padding: 5px;
   border-radius: 5px;
-  border: none;
+  border: 1px solid #000;
   resize: none;
   }
 
