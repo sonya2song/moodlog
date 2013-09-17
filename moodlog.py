@@ -46,7 +46,11 @@ class MainPage(webapp2.RequestHandler):
       else:
         self.response.write(p)
      
-
+  def head(self):
+      self.response.headers['Content-type']="text/html; charset=utf-8"
+      self.response.headers['Cache-Control']='public, max-age=7200'
+      self.response.headers['Pragma'] = 'Public'
+    
 class Entries(webapp2.RequestHandler):
   '''getting and creating entries'''  
   def get(self):
