@@ -1,5 +1,5 @@
 application: moodlogr
-version: 1-6
+version: 1-7-api
 runtime: python27
 api_version: 1
 threadsafe: true
@@ -26,6 +26,9 @@ handlers:
 - url: /vendor
   static_dir: vendor
   expiration: 5h
+
+- url: /_ah/spi/.*
+  script: api.server
 
 - url: /.*
   script: moodlog.application
