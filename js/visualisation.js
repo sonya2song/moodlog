@@ -15,7 +15,7 @@ function vis_draw() {
   
   
   var color=function(n) {
-	cs=["#FF5600",
+	var cs=["#FF5600",
 	    "#58026D",
 	    "#049B15",
 	    "#FFCA00",
@@ -30,22 +30,22 @@ function vis_draw() {
 	    return cs[n];
 		};
 
-  yscale=d3.scale.linear()
+  var yscale=d3.scale.linear()
     .domain([1,10])
     .range([distance,height-distance]);
 
-  xscale=d3.scale.linear()
+  var xscale=d3.scale.linear()
     .domain([0,30*24*60])
     .range([leftdistance,width-distance])
 
-  hexagon=d3.svg.line()
+  var hexagon=d3.svg.line()
     .x(function(d) { return d.x})
     .y(function(d) { return d.y})
     .interpolate("linear")(
       _.map([1,2,3,4,5,6],function(d){ return({x:
       Math.sin(Math.PI/3*d)*5, y: Math.cos(Math.PI/3*d)*5})}))
  
-  highlight = function(month,force) {
+  var highlight = function(month,force) {
     if (d3.select("#sel-"+month).attr('class')=="selected" &! force) {
       d3.select("#sel-"+month).attr('class',"");
       d3.select("#group-"+month).attr('class','month');
@@ -56,11 +56,11 @@ function vis_draw() {
       }
     }
  
-  line=d3.svg.line()
+  var line=d3.svg.line()
     .x(function(d) { return d.x })
     .y(function(d) { return d.y });
   
-  ygrid=svg.selectAll("line.ygrid")
+  var ygrid=svg.selectAll("line.ygrid")
     .data(_.range(1,11))
     .enter()
     .append("line")
@@ -71,7 +71,7 @@ function vis_draw() {
     .attr("y1",function(d) {return yscale(d)})
     .attr("y2",function(d) {return yscale(d)})
   
-  xgrid=svg.selectAll("line.xgrid")
+  var xgrid=svg.selectAll("line.xgrid")
     .data(_.range(0,31))
     .enter()
     .append("line")
@@ -82,7 +82,7 @@ function vis_draw() {
     .attr("y1",20)
     .attr("y2",height-20)
 
-  xlabel=svg.selectAll("text.xlabel")
+  var xlabel=svg.selectAll("text.xlabel")
     .data(_.range(0,31))
     .enter()
     .append("text")
@@ -92,7 +92,7 @@ function vis_draw() {
     .attr("class","xlabel")
     .text(function(d) { return d+1})
   
-  ylabel=svg.selectAll("text.ylabel")
+  var ylabel=svg.selectAll("text.ylabel")
     .data([1,10])
     .enter()
     .append("text")
@@ -122,8 +122,8 @@ function vis_draw() {
     return d.time})
     data=_.map(data,function(d) {
       d["y"]=yscale(d.score);
-      dt=new Date(d.time);
-      t=(dt.getDate()-1)*24*60+
+      var dt=new Date(d.time);
+      var t=(dt.getDate()-1)*24*60+
         dt.getHours()*60+
         dt.getMinutes();
       d["month"]=dt.getMonth();  
@@ -133,7 +133,7 @@ function vis_draw() {
       })
 
   data=_.values(_.reduce(data,function(x,y) {
-    month=y.month
+    var month=y.month
     if (x[month]!=undefined) {
       x[month].push(y);
       }
@@ -144,7 +144,7 @@ function vis_draw() {
     },{}))
 
 
-  months=svg.selectAll("g.month")
+  var months=svg.selectAll("g.month")
     .data(data)
     .enter()
     .append("g")

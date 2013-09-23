@@ -65,3 +65,7 @@ function carousel(i, wait) {
     i=0 }
   window.setTimeout(function(){carousel(i,wait)},wait)
   }
+
+window.onload=function() {
+  carousel(0,5000);
+  }
