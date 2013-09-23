@@ -71,7 +71,8 @@ body {
 }
 
 div.tagline {
-   display: inline-block;
+   //display: inline-block;
+   display: none;
    font-size: 110%;
 }
 
@@ -80,11 +81,12 @@ div.tagline > span, div.explanation > span {
 }
 
 div.heading {
-margin-left: 20px;
 }
 
 img.logo {
-  height: 110px;
+  width: 120px;
+  margin-left: auto;
+  margin-right: auto;
   }
 
 div.popup {
@@ -96,14 +98,15 @@ div.popup {
   }
 
 div.heading > div.title {
-  width: 450px;
-  float: left;
+  width: 120px;
+  margin-left: auto;
+  margin-right: auto;
   }
 
 div.heading > ul.menu {
   width: 200px;
   list-style: none;
-  float: left;
+  display: none;
   }
 
 div.content { 
@@ -142,4 +145,21 @@ ul.menu > li {
 svg > g.arrow > line {
   stroke: #000;
   stroke-width: 2px;
+  }
+
+#start {
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 120%;
+  }
+
+#login {
+  display: block;
+  width: 120px;
+  margin-left: auto;
+  margin-right: auto;
+  }
+#login > img {
+  width: 100%;
   }
