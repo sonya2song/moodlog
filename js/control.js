@@ -27,6 +27,8 @@ function init() {
 function authed() {
   if (gapi.auth.getToken()) {
     show_input();
+    gapi.client.moodlog.entries.list().execute(function(d) {
+      visualize(d.items) })
     d3.select("ul.menu").attr("style","display: block");
     }
   };
@@ -38,13 +40,23 @@ function show_input() {
   d3.select("#menu-input").attr("class","selected")
   }
 
+function reset_input() {
+  d3.select("#input-graph > svg").remove();
+  input_draw();
+  document.getElementById("note").value="";
+  d3.select("#submitbutton > img").remove();
+  d3.select("#submitbutton").append("a")
+    .attr("href","#")
+    .on("click",sbmt)
+    .append("img")
+    .attr("src","img/submit.png");
+  }
+
 function show_vis() {
   d3.selectAll("div.content > div").attr("style","display: none")
   d3.selectAll("#vis").attr("style","display: block")
   d3.selectAll(".menu > li").attr("class","")
   d3.select("#menu-view").attr("class","selected")
-  gapi.client.moodlog.entries.list().execute(function(d) {
-    visualize(d.items) })
   };
 
 function logout() {
