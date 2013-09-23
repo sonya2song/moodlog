@@ -30,21 +30,11 @@ class Visualisation(webapp2.RequestHandler):
 class MainPage(webapp2.RequestHandler):
   
   def get(self):
-    user=users.get_current_user()
-    if user:
-      self.redirect("/log")
-    else:
-      p=cache.get("start")
-      self.response.headers['Content-type']="text/html; charset=utf-8"
-      self.response.headers['Cache-Control']='public, max-age=7200'
-      self.response.headers['Pragma'] = 'Public'
-      if not p:
-        t=jenv.get_template("start.html")
-        self.response.write(
-          cache.set("start",
-            t.render(loginlink=users.create_login_url('/log'))))
-      else:
-        self.response.write(p)
+    f=open("index.html")
+    self.response.headers['Content-type']="text/html; charset=utf-8"
+    self.response.headers['Cache-Control']='public, max-age=7200'
+    self.response.headers['Pragma'] = 'Public'
+    self.response.write(f.read())
      
   def head(self):
       self.response.headers['Content-type']="text/html; charset=utf-8"

@@ -157,7 +157,18 @@ svg > g.arrow > line {
   width: 120px;
   margin-left: auto;
   margin-right: auto;
+  opacity: 0.2;
   }
 #login > img {
   width: 100%;
+  }
+
+.carousel > span {
+  display: inline-block;
+  width: 50px;
+  vertical-align: middle;
+  }
+
+#input, #vis {
+  display: none;
   }
