@@ -4,42 +4,199 @@ svg > g.month > path {
   stroke-width: 2px;
   }
 
-svg > g.month, ul#control > li {
+svg > g.month {
   opacity: 0.2
   }
+
+ul#control > li {
+}
 
 svg > g.month:hover, svg> g.selected , ul#control> li:hover, ul#control> li.selected{
   opacity: 1
   }
+
+svg  #mouth {
+  fill: none;
+  }
+
+svg > g.month > path.point {
+  stroke: none;
+  }
+
+ul#control> li:hover, ul#control> li.selected{
+  box-shadow: 0px 0px 7px #000;
+}
 
 svg > line.grid {
   stroke: #AAA;
   stroke-width: 1px;
   stroke-dasharray: 5,3;
   }
+
 ul#control {
   list-style: none;
-  width: 700px;
+  width: 1400px;
+  padding-left: 150px;
   }
 
 ul#control > li {
   display: inline-block;
-  width: 100px;
+  width: 80px;
   padding: 2px;
   border-radius: 2px;
   float: left;
   text-align: center;
-  margin: 5px;
+  margin: 5px; 
+  color: #FFF;
   }
 
 svg > text.xlabel, svg > text.ylabel {
   font-size: 15px;
   }
 svg > text.xlabel {
-  fill: #AAAAFF;
+  fill: #000;
   }
 svg > text.ylabel {
-  fill: #AAA;
+  fill: #000;
+  }
+
+svg > rect.popup {
+  fill: #FFF;
+  }
+
+body {
+   background: #F9F4D2;
+   font-family: pacifico,helvetica,sans-serif;
+   font-weight: lighter; 
+}
+
+div.tagline {
+   //display: inline-block;
+   display: none;
+   font-size: 110%;
+}
+
+div.tagline > span, div.explanation > span {
+   background: #35C0CD;
+}
+
+div.heading {
+}
+
+img.logo {
+  width: 100%;
+  }
+
+div.popup {
+  background: #FFF;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 75%;
+  box-shadow: 1px 1px 5px #000;
+  }
+
+div.heading > div.title {
+  width: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  }
+
+div.heading > ul.menu {
+  width: 200px;
+  list-style: none;
+  display: none;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  margin: 0px;
+  }
+
+div.content { 
+  clear: both;
+  position: relative;
+  top: 10px;
+  }
+div.footnote {
+  margin-top: 30px;
+  font-size: 70%;
+  }
+
+ul.menu > li {
+  display: inline-block;
+  width: 30px;
+  border-radius: 0px 0px 5px 5px;
+  background: #35C0CD;
+  }
+
+ul.menu > li.selected {
+  box-shadow: 0px 1px 3px #000;
+  }
+
+#input > #input-graph {
+  float: left;
+  width: 200px;
+  }
+
+#input > #form {
+  float: left;
+  }
+
+#input  textarea {
+  width: 200px;
+  height: 200px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #000;
+  resize: none;
+  }
+
+svg > g.arrow > line {
+  stroke: #000;
+  stroke-width: 2px;
+  }
+
+#start {
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 180%;
+  }
+
+#input {
+  width: 670px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 180%;
+  }
+
+#login {
+  display: block;
+  width: 120px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0.2;
+  }
+#login > img {
+  width: 100%;
+  }
+
+.carousel > span {
+  display: inline-block;
+  width: 70px;
+  vertical-align: middle;
+  }
+
+#input, #vis {
+  display: none;
+  }
+
+#input .group > div {
+  display: inline-block;
+  vertical-align: middle;
+  }
+
+.group > .group2 {
+  text-align: center;
   }
 
 svg  #mouth   {

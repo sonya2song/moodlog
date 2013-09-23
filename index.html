@@ -1,20 +1,83 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Electrocardiogr_ama</title>
+<title>Moodlog</title>
+<link href='http://fonts.googleapis.com/css?family=Pacifico'
+rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="css/moodlog.css" type="text/css"
 medium="screen" />
+<link rel="icon" href="img/favicon.ico" />
+
 </head>
 <body>
-<div id="graph">
+<div class="heading"> 
+<div class="title">
+    <img class="logo" src="img/moodlog_.png" /> 
+    <div class="tagline"> 
+       how do you <span>feel</span> now?<br/>
+       create a graphic memory of <span>yourself</span>!
+     </div>
+</div>     
+<ul class="menu">
+<li id="menu-input" ><a href="#" onclick="show_input()"><img src="img/log.png" title="log how you feel now"></a></li>
+<li id="menu-view"><a href="#" onclick="show_vis()"><img src="img/view.png" title="view your graphical
+memory" /></a></li>
+<li><a href="#" onclick="logout()"><img src="img/logout.svg" title="logout"
+alt="logout" width="30px"/></a></li>
+</ul>
+</div>
+<div class="content">
+<div id="start">
+<div class="carousel">How <span>happy sad</span> do you feel now?</div>
+<div class="carousel">Did you ever want to look back and know how
+were feeling?</div>
+<div class="carousel">Moodlog helps you log your mood and visualize
+your emotions.</div>
+<a href="#" id="login"><img src="img/login_moodlog.png"/></a>
+</div>
+
+<div id="input">
+<div class="group">
+I am feeling ...
+<div class="group2">
+<div>
+happy
+</div>
+<div id="input-graph">
+</div>
+<div>
+sad
+</div>
+</div>
+<div id="form">
+<textarea id="note" name="note" maxlength="250" placeholder="what makes you
+ feel that way"?></textarea>
+ </div>
+<div id="submitbutton"><a href="#" onclick="sbmt()"><img src="img/submit.png"
+title="submit"/></a></div>
+</div>
+</div>
+
+<div id="vis">
+<div id="vis-graph">
 </div>
 <ul id="control">
 </ul>
+</div>
 
-<script src="vendor/js/d3.v3.min.js"></script>
+</div>
 <script src="vendor/js/underscore-min.js"></script>
-<script src="vendor/js/showdown.js"></script>
+<script src="vendor/js/backbone-min.js"></script>
+<script src="vendor/js/d3.v3.min.js"></script>
+<script src="js/input.js"></script>
 <script src="js/visualisation.js"></script>
-<script src="data_sorted.json"></script>
+<script src="js/control.js"></script>
+<script>
+window.onload=function() {
+  carousel(0,5000);
+  }
+</script>
+<script src="https://apis.google.com/js/client.js?onload=init">
+</script>
 </body>
 </html>

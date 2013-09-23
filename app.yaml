@@ -1,0 +1,16 @@
+application: moodlogr
+version: 2-0
+runtime: python27
+api_version: 1
+threadsafe: true
+
+libraries:
+- name: webapp2
+  version: latest
+
+handlers:
+- url: /_ah/spi/.*
+  script: api.server
+
+- url: /.*
+  script: moodlog.application
