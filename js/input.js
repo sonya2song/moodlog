@@ -98,7 +98,9 @@ function input_draw() {
     .enter()
     .append("g")
     .attr("class","arrow")
-    .attr("transform",function(d) { if (d) { of=1 } else {of=-1} ;return "translate("+
+    .attr("transform",function(d) { var of;
+      if (d) { of=1 } else {of=-1} ;
+      return "translate("+
           [xcenter,ycenter-(rface+5) * of]+") rotate("+180*d+")" })
           
   arrow.append("line")
@@ -123,13 +125,13 @@ function input_draw() {
 
 
 function sbmt() {
-  smilescale=d3.scale.linear()
+  var smilescale=d3.scale.linear()
     .domain([50,250])
     .range([1,10])
 
-  note=document.getElementById("note").value;
+  var note=document.getElementById("note").value;
   d3.select("svg > g#smiley").each(function(d) {
-    score=smilescale(d.y);
+    var score=smilescale(d.y);
     gapi.client.moodlog.entry.insert({score: score, note: note})
       .execute(function(d) { console.log(d);
         show_vis();});

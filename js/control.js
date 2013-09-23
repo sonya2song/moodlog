@@ -20,8 +20,8 @@ function init() {
         authed);
       })
     d3.select("#login").attr("style","opacity: 1")
-    }, ROOT)
-  }
+    }, ROOT);
+  };
 
 
 function authed() {
@@ -45,7 +45,7 @@ function show_vis() {
   d3.select("#menu-view").attr("class","selected")
   gapi.client.moodlog.entries.list().execute(function(d) {
     visualize(d.items) })
-  }
+  };
 
 function logout() {
   d3.selectAll("div.content > div").attr("style","display: none");
@@ -58,13 +58,13 @@ function logout() {
   };
 
 function carousel(i, wait) {
-  cs=d3.selectAll(".carousel").attr("style","opacity: 0.2")
+  var cs=d3.selectAll(".carousel").attr("style","opacity: 0.2")
   cs[0][i].style.opacity=1;
   i++;
   if (i==cs[0].length) {
     i=0 }
   window.setTimeout(function(){carousel(i,wait)},wait)
-  }
+  };
 
 window.onload=function() {
   carousel(0,5000);
