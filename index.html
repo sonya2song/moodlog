@@ -19,10 +19,10 @@ medium="screen" />
      </div>
 </div>     
 <ul class="menu">
-<li><a href="/log"><img src="img/log.png" title="log how you feel now"></a></li>
-<li><a href="/view"><img src="img/view.png" title="view your graphical
+<li id="menu-input" ><a href="#" onclick="show_input()"><img src="img/log.png" title="log how you feel now"></a></li>
+<li id="menu-view"><a href="#" onclick="show_vis()"><img src="img/view.png" title="view your graphical
 memory" /></a></li>
-<li><a href="{{logouturl}}"><img src="img/logout.svg" title="logout"
+<li><a href="#" onclick="logout()"><img src="img/logout.svg" title="logout"
 alt="logout" width="30px"/></a></li>
 </ul>
 </div>
@@ -59,6 +59,10 @@ title="submit"/></a></div>
 </div>
 
 <div id="vis">
+<div id="vis-graph">
+</div>
+<ul id="control">
+</ul>
 </div>
 
 </div>
@@ -66,6 +70,7 @@ title="submit"/></a></div>
 <script src="vendor/js/backbone-min.js"></script>
 <script src="vendor/js/d3.v3.min.js"></script>
 <script src="js/input.js"></script>
+<script src="js/visualisation.js"></script>
 <script src="js/control.js"></script>
 <script>
 window.onload=function() {

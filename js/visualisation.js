@@ -1,4 +1,4 @@
-function draw(data) {
+function vis_draw() {
   var width=1400;
   var height=350;
   var distance=50;
@@ -8,7 +8,7 @@ function draw(data) {
     "June","July","August","September","October","November",
     "December"];
 
-  var svg=d3.select("#graph")
+  var svg=d3.select("#vis-graph")
     .append("svg")
     .attr("width",width)
     .attr("height",height);
@@ -44,34 +44,9 @@ function draw(data) {
     .interpolate("linear")(
       _.map([1,2,3,4,5,6],function(d){ return({x:
       Math.sin(Math.PI/3*d)*5, y: Math.cos(Math.PI/3*d)*5})}))
-  
-  data=_.sortBy(data,function(d) {  
-    return d.time})
-  data=_.map(data,function(d) {
-    d["y"]=yscale(d.score);
-    dt=new Date(d.time);
-    t=(dt.getDate()-1)*24*60+
-      dt.getHours()*60+
-      dt.getMinutes();
-    d["month"]=dt.getMonth();  
-    d["x"]=xscale(t);
-    d["color"]=color(d.month);
-    return d;
-    })
-
-  data=_.values(_.reduce(data,function(x,y) {
-    month=y.month
-    if (x[month]!=undefined) {
-      x[month].push(y);
-      }
-    else {
-      x[month]=[y];
-      }
-    return x  
-    },{}))
-
-  highlight = function(month) {
-    if (d3.select("#sel-"+month).attr('class')=="selected") {
+ 
+  highlight = function(month,force) {
+    if (d3.select("#sel-"+month).attr('class')=="selected" &! force) {
       d3.select("#sel-"+month).attr('class',"");
       d3.select("#group-"+month).attr('class','month');
       }
@@ -132,6 +107,43 @@ function draw(data) {
     .text(function(d) { if (d==1) { return "happy" }
       else { return "sad" }})
 
+  d3.select("#control").selectAll("li")
+    .data([0,1,2,3,4,5,6,7,8,9,10,11])
+    .enter()
+    .append("li")
+    .attr("id",function(d) { return ("sel-"+d) })
+    .attr("style",function(d) { return "background: "+color(d)})
+    .text(function(d) {return month_names[d]})
+    .on("click",function(d) {highlight(d)})
+
+  return function(data) {    
+    //data
+    data=_.sortBy(data,function(d) {  
+    return d.time})
+    data=_.map(data,function(d) {
+      d["y"]=yscale(d.score);
+      dt=new Date(d.time);
+      t=(dt.getDate()-1)*24*60+
+        dt.getHours()*60+
+        dt.getMinutes();
+      d["month"]=dt.getMonth();  
+      d["x"]=xscale(t);
+      d["color"]=color(d.month);
+      return d;
+      })
+
+  data=_.values(_.reduce(data,function(x,y) {
+    month=y.month
+    if (x[month]!=undefined) {
+      x[month].push(y);
+      }
+    else {
+      x[month]=[y];
+      }
+    return x  
+    },{}))
+
+
   months=svg.selectAll("g.month")
     .data(data)
     .enter()
@@ -173,16 +185,10 @@ function draw(data) {
   
 
   
-  d3.select("#control").selectAll("li")
-    .data([0,1,2,3,4,5,6,7,8,9,10,11])
-    .enter()
-    .append("li")
-    .attr("id",function(d) { return ("sel-"+d) })
-    .attr("style",function(d) { return "background: "+color(d)})
-    .text(function(d) {return month_names[d]})
-    .on("click",function(d) {highlight(d)})
   
-  highlight(new Date().getMonth());
-}
+  highlight(new Date().getMonth(),true);
+}}
 
-d3.json("/api/1/entries",draw)
+
+
+//d3.json("/api/1/entries",draw)

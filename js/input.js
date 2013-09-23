@@ -131,7 +131,8 @@ function sbmt() {
   d3.select("svg > g#smiley").each(function(d) {
     score=smilescale(d.y);
     gapi.client.moodlog.entry.insert({score: score, note: note})
-      .execute(function(d) { console.log(d) });
+      .execute(function(d) { console.log(d);
+        show_vis();});
     d3.select("#submitbutton a").remove()
     d3.select("#submitbutton").append("img")
       .attr("src","img/submit.png")

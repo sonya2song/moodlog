@@ -105,6 +105,10 @@ div.heading > ul.menu {
   width: 200px;
   list-style: none;
   display: none;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  margin: 0px;
   }
 
 div.content { 
@@ -120,6 +124,12 @@ div.footnote {
 ul.menu > li {
   display: inline-block;
   width: 30px;
+  border-radius: 0px 0px 5px 5px;
+  background: #35C0CD;
+  }
+
+ul.menu > li.selected {
+  box-shadow: 0px 1px 3px #000;
   }
 
 #input > #input-graph {
