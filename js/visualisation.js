@@ -1,8 +1,10 @@
 function vis_draw() {
   var width=1400;
-  var height=350;
+  var height=375;
   var distance=50;
   var leftdistance=75;
+  var bottomdistance=75;
+  var background="#F9F4D2";
 
   var month_names=["January","February","March","April","May",
     "June","July","August","September","October","November",
@@ -32,7 +34,7 @@ function vis_draw() {
 
   var yscale=d3.scale.linear()
     .domain([1,10])
-    .range([distance,height-distance]);
+    .range([distance,height-bottomdistance]);
 
   var xscale=d3.scale.linear()
     .domain([0,30*24*60])
@@ -42,17 +44,29 @@ function vis_draw() {
     .x(function(d) { return d.x})
     .y(function(d) { return d.y})
     .interpolate("linear")(
-      _.map([1,2,3,4,5,6],function(d){ return({x:
+      _.map([1,2,3,4,5,6,1],function(d){ return({x:
       Math.sin(Math.PI/3*d)*5, y: Math.cos(Math.PI/3*d)*5})}))
- 
+  
+  var month_hexagon=d3.svg.line()
+    .x(function(d) { return d.x})
+    .y(function(d) { return d.y})
+    .interpolate("linear")(
+      _.map([1,2,3,4,5,6,1],function(d){ return({x:
+      Math.sin(Math.PI/3*d)*15, y: Math.cos(Math.PI/3*d)*15})}))
+
+
   var highlight = function(month,force) {
-    if (d3.select("#sel-"+month).attr('class')=="selected" &! force) {
-      d3.select("#sel-"+month).attr('class',"");
+    if (d3.select("#sel-"+month).attr('class')=="selector selected" &! force) {
+      d3.select("#sel-"+month).attr('class',"selector");
       d3.select("#group-"+month).attr('class','month');
+      d3.select("#sel-"+month+" path").attr("style",
+        "fill: "+background+"; stroke: "+color(month))
       }
     else {
-      d3.select("#sel-"+month).attr('class',"selected");
+      d3.select("#sel-"+month).attr('class',"selector selected");
       d3.select("#group-"+month).attr('class','month selected');
+      d3.select("#sel-"+month+" path").attr("style","fill: "+color(month)+
+      "; stroke: "+color(month))
       }
     }
  
@@ -80,14 +94,14 @@ function vis_draw() {
     .attr("x1",function(d) {return xscale(d*24*60)})
     .attr("x2",function(d) {return xscale(d*24*60)})
     .attr("y1",20)
-    .attr("y2",height-20)
+    .attr("y2",height-45)
 
   var xlabel=svg.selectAll("text.xlabel")
     .data(_.range(0,31))
     .enter()
     .append("text")
     .attr("x",function(d) { return xscale(d*24*60) })
-    .attr("y",height-23)
+    .attr("y",height-48)
     .attr("dx",1)
     .attr("class","xlabel")
     .text(function(d) { return d+1})
@@ -107,14 +121,25 @@ function vis_draw() {
     .text(function(d) { if (d==1) { return "happy" }
       else { return "sad" }})
 
-  d3.select("#control").selectAll("li")
+  var msel=svg.selectAll("g.selector")
     .data([0,1,2,3,4,5,6,7,8,9,10,11])
     .enter()
-    .append("li")
+    .append("g")
+    .attr("class","selector")
     .attr("id",function(d) { return ("sel-"+d) })
-    .attr("style",function(d) { return "background: "+color(d)})
-    .text(function(d) {return month_names[d]})
+    .attr("transform",function(d) {
+      return "translate("+[90+d*110,height-20]+")"})
     .on("click",function(d) {highlight(d)})
+
+   msel.append("path")
+    .attr("d",month_hexagon)
+    .attr("style",function(d) { return "fill: "+background+"; stroke: "+color(d)})
+    .text(function(d) {return month_names[d]})
+  
+   msel.append("text")
+    .attr("x",15)
+    .attr("y",7)
+    .text(function(d) {return month_names[d] })
 
   return function(data) {    
     //data
