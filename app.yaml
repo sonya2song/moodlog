@@ -1,5 +1,5 @@
 application: moodlogr
-version: 1-7
+version: 2-0
 runtime: python27
 api_version: 1
 threadsafe: true
@@ -7,26 +7,8 @@ threadsafe: true
 libraries:
 - name: webapp2
   version: latest
-- name: jinja2
-  version: latest
 
 handlers:
-- url: /css
-  static_dir: css
-  expiration: 1h
-
-- url: /js
-  static_dir: js
-  expiration: 1h
-
-- url: /img
-  static_dir: img
-  expiration: 1h
-
-- url: /vendor
-  static_dir: vendor
-  expiration: 5h
-
 - url: /_ah/spi/.*
   script: api.server
 
