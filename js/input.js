@@ -130,11 +130,14 @@ function sbmt() {
     .range([1,10])
 
   var note=document.getElementById("note").value;
+  d3.select("#vis svg").remove();
+  visualize=vis_draw();
   d3.select("svg > g#smiley").each(function(d) {
     var score=smilescale(d.y);
     gapi.client.moodlog.entry.insert({score: score, note: note})
       .execute(function(d) { console.log(d);
-        show_vis();});
+        show_vis();
+        reset_input();});
     d3.select("#submitbutton a").remove()
     d3.select("#submitbutton").append("img")
       .attr("src","img/submit.png")
