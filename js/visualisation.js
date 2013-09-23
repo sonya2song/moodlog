@@ -52,7 +52,7 @@ function vis_draw() {
     .y(function(d) { return d.y})
     .interpolate("linear")(
       _.map([1,2,3,4,5,6,1],function(d){ return({x:
-      Math.sin(Math.PI/3*d)*15, y: Math.cos(Math.PI/3*d)*15})}))
+      Math.sin(Math.PI/3*d)*11, y: Math.cos(Math.PI/3*d)*11})}))
 
 
   var highlight = function(month,force) {
@@ -137,7 +137,7 @@ function vis_draw() {
     .text(function(d) {return month_names[d]})
   
    msel.append("text")
-    .attr("x",15)
+    .attr("x",11)
     .attr("y",7)
     .text(function(d) {return month_names[d] })
 
