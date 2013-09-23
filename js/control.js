@@ -1,4 +1,6 @@
 var visualize;
+var user={};
+
 function init() {
   input_draw();
   visualize=vis_draw();
@@ -28,7 +30,8 @@ function authed() {
   if (gapi.auth.getToken()) {
     show_input();
     gapi.client.moodlog.entries.list().execute(function(d) {
-      visualize(d.items) })
+      user.data=d.items;
+      visualize(user.data); })
     d3.select("ul.menu").attr("style","display: block");
     }
   };
@@ -57,6 +60,7 @@ function show_vis() {
   d3.selectAll("#vis").attr("style","display: block")
   d3.selectAll(".menu > li").attr("class","")
   d3.select("#menu-view").attr("class","selected")
+  visualize(user.data);
   };
 
 function logout() {
@@ -64,6 +68,7 @@ function logout() {
   d3.selectAll("#start").attr("style","display: block");
   d3.select("ul.menu").attr("style","display: none");
   gapi.auth.setToken(null);
+  user={};
   d3.selectAll("svg").remove();
   input_draw();
   visualize=vis_draw();
