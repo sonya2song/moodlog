@@ -136,6 +136,7 @@ function sbmt() {
     var score=smilescale(d.y);
     gapi.client.moodlog.entry.insert({score: score, note: note})
       .execute(function(d) { console.log(d);
+        user.data.push(d);
         show_vis();
         reset_input();});
     d3.select("#submitbutton a").remove()

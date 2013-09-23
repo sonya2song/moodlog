@@ -34,7 +34,9 @@ class MoodlogApi(remote.Service):
     entry.author=user
     entry.note=request.note
     entry.score=request.score
-    entry.put()
+    key=entry.put()
+    request.id=key.id()
+    request.time=entry.time.isoformat()
     return request
   
   @endpoints.method(EntryMessage,VoidMessage,name="entry.delete",path="entry",http_method="Delete")
