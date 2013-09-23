@@ -1,3 +1,8 @@
+function init() {
+  var ROOT="https://moodlogr.appspot.com/_ah/api"
+  gapi.client.load("moodlog","v2",function() {
+    console.log("moodlog loaded")}, ROOT)
+  }
 
 function carousel(i, wait) {
   cs=d3.selectAll(".carousel").attr("style","opacity: 0.2")

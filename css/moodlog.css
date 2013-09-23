@@ -84,9 +84,7 @@ div.heading {
 }
 
 img.logo {
-  width: 120px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
   }
 
 div.popup {
@@ -98,7 +96,7 @@ div.popup {
   }
 
 div.heading > div.title {
-  width: 120px;
+  width: 150px;
   margin-left: auto;
   margin-right: auto;
   }
