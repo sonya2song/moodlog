@@ -66,7 +66,7 @@ svg > rect.popup {
 
 body {
    background: #F9F4D2;
-   font-family: helvetica,sans-serif;
+   font-family: pacifico,helvetica,sans-serif;
    font-weight: lighter; 
 }
 
@@ -122,7 +122,7 @@ ul.menu > li {
   width: 30px;
   }
 
-#input > #graph {
+#input > #input-graph {
   float: left;
   width: 200px;
   }
@@ -149,7 +149,14 @@ svg > g.arrow > line {
   width: 400px;
   margin-left: auto;
   margin-right: auto;
-  font-size: 120%;
+  font-size: 180%;
+  }
+
+#input {
+  width: 670px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 180%;
   }
 
 #login {
@@ -165,10 +172,19 @@ svg > g.arrow > line {
 
 .carousel > span {
   display: inline-block;
-  width: 50px;
+  width: 70px;
   vertical-align: middle;
   }
 
 #input, #vis {
   display: none;
+  }
+
+#input .group > div {
+  display: inline-block;
+  vertical-align: middle;
+  }
+
+.group > .group2 {
+  text-align: center;
   }

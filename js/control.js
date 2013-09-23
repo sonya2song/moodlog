@@ -1,4 +1,5 @@
 function init() {
+  input_draw();
   var ROOT="https://moodlogr.appspot.com/_ah/api";
   var cid="467877166527.apps.googleusercontent.com";
   var scope="https://www.googleapis.com/auth/userinfo.email";
@@ -27,7 +28,7 @@ function authed() {
 
 function show_input() {
   d3.selectAll("div.content > div").attr("style","display: none")
-  d3.selectAll("#log").attr("style","display: block")
+  d3.selectAll("#input").attr("style","display: block")
   }
 function carousel(i, wait) {
   cs=d3.selectAll(".carousel").attr("style","opacity: 0.2")

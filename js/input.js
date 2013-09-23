@@ -1,9 +1,9 @@
-function draw() {
+function input_draw() {
   var width=200;
   var height=300;
   var distance=50;
 
-  var svg=d3.select("#graph")
+  var svg=d3.select("#input-graph")
     .append("svg")
     .attr("width",width)
     .attr("height",height);
@@ -130,21 +130,8 @@ function sbmt() {
   note=document.getElementById("note").value;
   d3.select("svg > g#smiley").each(function(d) {
     score=smilescale(d.y);
-    xh=new XMLHttpRequest();
-    xh.open("POST","/api/1/entries",true);
-    xh.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-    xh.send("note="+note+"&score="+score)
-    xh.onreadystatechange=function() {
-      console.log(xh.readyState)
-      if (xh.readyState==4 && xh.status==200){ 
-          response=JSON.parse(xh.responseText);
-          if (response.status=="success") {
-            window.location.href="/view"; }
-          else {
-            window.location.href="/";
-            }
-          }
-    }
+    gapi.client.moodlog.entry.insert({score: score, note: note})
+      .execute(function(d) { console.log(d) });
     d3.select("#submitbutton a").remove()
     d3.select("#submitbutton").append("img")
       .attr("src","img/submit.png")
