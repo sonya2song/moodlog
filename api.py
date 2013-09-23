@@ -14,6 +14,7 @@ class EntryMessage(messages.Message):
   score=messages.FloatField(1,required=True)
   note=messages.StringField(2)
   time=messages.StringField(3)
+  id=messages.IntegerField(4);
 
 class EntryList(messages.Message):
   items=messages.MessageField(EntryMessage,1,repeated=True)
@@ -36,6 +37,15 @@ class MoodlogApi(remote.Service):
     entry.put()
     return request
   
+  @endpoints.method(EntryMessage,VoidMessage,name="entry.delete",path="entry",http_method="Delete")
+  def delete_entry(self,request):
+    user=endpoints.get_current_user()
+    if not user:
+      raise endpoints.UnauthorizedException('Invalid token.')
+    k=ndb.Key("user-email",user.email(),"Entry",request.id)
+    k.delete()
+    return VoidMessage()
+  
   @endpoints.method(VoidMessage,EntryList,name="entries.list",path="entry",http_method="GET")
   def list_entries(self,void):
     user=endpoints.get_current_user()
@@ -47,7 +57,8 @@ class MoodlogApi(remote.Service):
     entries_query=Entry.query(Entry.time >=oy,ancestor=p)
     entries=entries_query.fetch()
     el=EntryList()
-    el.items=[EntryMessage(note=e.note,score=e.score,time=e.time.isoformat())
+    el.items=[EntryMessage(note=e.note,score=e.score,time=e.time.isoformat(),
+      id=e.key.id())
       for e in entries]
     return el
 
