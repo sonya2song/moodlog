@@ -1,6 +1,7 @@
 
-#vis-graph {
+#vis-graph > svg{
   min-width: 700px;
+  height: 70%;
   }
 
 #input-graph svg, #input-graph {
