@@ -1,3 +1,13 @@
+
+#vis-graph {
+  min-width: 700px;
+  }
+
+#input-graph svg, #input-graph {
+  width: 200px;
+  height: 300px;
+  }
+
 svg > g.month > path {
   fill: none;
   stroke: #000;
@@ -105,11 +115,11 @@ div.heading > div.title {
   }
 
 div.heading > ul.menu {
-  width: 200px;
+  width: auto;
   list-style: none;
   display: none;
-  position: absolute;
-  right: 0px;
+  position: fixed;
+  right: 20px;
   top: 0px;
   margin: 0px;
   }
@@ -189,6 +199,13 @@ svg > g.arrow > line {
   vertical-align: middle;
   }
 
+.carousel {
+  opacity: 0.2;
+  }
+
+.carousel.selected {
+  opacity: 1;
+  }
 #input, #vis {
   display: none;
   }
@@ -205,3 +222,41 @@ svg > g.arrow > line {
 svg  #mouth   {
   fill: none;
   }
+
+@media screen and (max-width: 700px) {
+#input .group >div {
+  width: 200px;
+  display: block;
+  text-align: center;
+}
+
+#input {
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  }
+
+div.heading >div.title {
+  margin-top: 45px;
+  }
+
+div.heading > ul.menu {
+  position: absolute;
+  }
+  
+}
+
+@media screen and (max-width: 480px) {
+  #start {
+    width: auto;
+    margin-left: 5px;
+    margin-right: 5px;
+    }
+.carousel {
+  display: none;
+  }
+
+.carousel.selected {
+  display: block;
+  }
+}

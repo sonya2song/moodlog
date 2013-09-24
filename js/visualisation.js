@@ -12,8 +12,8 @@ function vis_draw() {
 
   var svg=d3.select("#vis-graph")
     .append("svg")
-    .attr("width",width)
-    .attr("height",height);
+    .attr("viewBox","0 0 "+width+" "+height)
+    .attr("preserveAspectRatio", "xMinYMin meet");
   
   
   var color=function(n) {
