@@ -1,5 +1,5 @@
 
-#vis-graph > svg{
+#vis-graph, #vis-graph > svg{
   min-width: 700px;
   height: 70%;
   }
@@ -253,6 +253,10 @@ div.heading > ul.menu {
     margin-left: 5px;
     margin-right: 5px;
     }
+
+div.heading > div.title > img {
+  width: 100px;
+  }
 .carousel {
   display: none;
   }
