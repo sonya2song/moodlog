@@ -75,8 +75,8 @@ function logout() {
   };
 
 function carousel(i, wait) {
-  var cs=d3.selectAll(".carousel").attr("style","opacity: 0.2")
-  cs[0][i].style.opacity=1;
+  var cs=d3.selectAll(".carousel").attr("class","carousel")
+  cs[0][i].className="carousel selected";
   i++;
   if (i==cs[0].length) {
     i=0 }

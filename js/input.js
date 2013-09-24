@@ -5,8 +5,8 @@ function input_draw() {
 
   var svg=d3.select("#input-graph")
     .append("svg")
-    .attr("width",width)
-    .attr("height",height);
+    .attr("viewBox","0 0 "+width+" "+height)
+    .attr("preserveAspectRatio", "xMinYMin meet");
 	
 	var xcenter = 100;
 	var ycenter = 150;
