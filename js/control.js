@@ -8,6 +8,10 @@ function init() {
   var cid="467877166527.apps.googleusercontent.com";
   var scope="https://www.googleapis.com/auth/userinfo.email";
   gapi.client.load("moodlog","v2",function() {
+    if (! gapi.client.moodlog) {
+      // if the client did not load successfully load again!
+      init(); }
+
     /* gapi.auth.authorize({client_id: cid,
       scope: scope,
       immediate: true,
