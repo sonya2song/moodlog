@@ -6,7 +6,9 @@ import datetime
 
 from models import Entry
 
-allowed_ids=["467877166527.apps.googleusercontent.com",endpoints.API_EXPLORER_CLIENT_ID]
+allowed_ids=[
+    "746592052323-tal7u251f9ioc9m6b9bo159cuhbq20n5.apps.googleusercontent.com",
+    "467877166527.apps.googleusercontent.com",endpoints.API_EXPLORER_CLIENT_ID]
 class VoidMessage(messages.Message):
   pass
 
