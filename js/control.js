@@ -5,7 +5,7 @@ function init() {
   input_draw();
   visualize=vis_draw();
   var ROOT="https://moodlogr.appspot.com/_ah/api";
-  var cid="467877166527.apps.googleusercontent.com";
+  var cid="746592052323-tal7u251f9ioc9m6b9bo159cuhbq20n5.apps.googleusercontent.com";
   var scope="https://www.googleapis.com/auth/userinfo.email";
   gapi.client.load("moodlog","v2",function() {
     if (! gapi.client.moodlog) {
